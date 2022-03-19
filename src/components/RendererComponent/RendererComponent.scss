@@ -1,0 +1,183 @@
+.fullContainer {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 80px calc(100% - 80px);
+  background: linear-gradient(var(--theme-primary), var(--theme-secondary));
+  z-index: -2;
+  overflow-y: hidden;
+  position: fixed;
+  .center {
+    margin: auto;
+  }
+  .top {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    row-gap: 8px;
+    > .headlineOne {
+      text-align: center;
+      font-family: "Bangers", cursive;
+      font-size: 40px;
+      line-height: 48px;
+    }
+    .tabs {
+      display: flex;
+      min-width: 480px;
+      width: fit-content;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 48px 0 16px;
+      .tab {
+        background-color: var(--theme-secondary);
+        border-top-left-radius: var(--round-medium);
+        border-top-right-radius: var(--round-medium);
+        padding: 4px 16px;
+        color: white;
+        transition: opacity 0.267s ease;
+        &:hover {
+          cursor: pointer;
+          background-color: var(--theme-teritary);
+        }
+        &.active {
+          background-color: var(--theme-primary-background);
+          color: var(--theme-text-title);
+        }
+      }
+    }
+  }
+  .bottom {
+    display: flex;
+    width: 100%;
+    overflow-y: auto;
+    .content {
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto 24px auto;
+      min-width: 480px;
+      width: fit-content;
+      max-width: 720px;
+      min-height: 320px;
+      height: fit-content;
+      background-color: var(--theme-primary-background);
+      box-shadow: var(--theme-shadow-light);
+      border-radius: var(--round-small);
+      padding: 24px;
+      > .headlineTwo {
+        font-family: "Bangers", cursive;
+        font-size: 32px;
+        line-height: 40px;
+        letter-spacing: 1px;
+      }
+      &.list {
+        animation: fadeSlideRight 0.267s forwards;
+      }
+      &.grid {
+        animation: fadeSlideRight2 0.268s forwards;
+      }
+      &.datagrid {
+        animation: fadeSlideRight3 0.269s forwards;
+      }
+      .listContent {
+        display: flex;
+        flex-direction: column;
+        row-gap: 4px;
+        margin-top: 8px;
+      }
+      .gridContent {
+        display: grid;
+        grid-template-columns: 49% 49%;
+        row-gap: 16px;
+        column-gap: 8px;
+        margin-top: 8px;
+      }
+    }
+  }
+}
+.heroListItem {
+  display: grid;
+  grid-template-columns: 32px 160px auto;
+  padding: 4px 8px;
+  border-radius: var(--round-small);
+  &.odd {
+    background-color: var(--theme-secondary-background);
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: var(--theme-teritary);
+    color: white;
+  }
+}
+.heroGridItem {
+  border-radius: var(--round-small);
+  box-shadow: var(--theme-shadow-light);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .headlineThree {
+    padding: 4px 8px;
+    background-color: var(--theme-primary-background);
+    color: var(--theme-text-secondary);
+    font-family: "Bangers", cursive;
+    font-size: 24px;
+    line-height: 36px;
+  }
+  &:hover {
+    cursor: pointer;
+    opacity: 0.95;
+    animation: hoverGrow 0.267s forwards;
+  }
+}
+.imageWrapper {
+  width: 100%;
+  min-width: 100%;
+  min-height: 320px;
+  max-height: 320px;
+  display: flex;
+
+  img {
+    width: 100%;
+    min-width: 100%;
+    min-height: 320px;
+    max-height: 320px;
+  }
+}
+.noImageWrapper {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 240px;
+  justify-content: center;
+}
+.datagrid {
+  min-width: 640px;
+  width: 100%;
+  height: 480px;
+  min-height: 480px;
+}
+@media only screen and (max-width: 800px) {
+  .datagrid {
+    min-width: 100% !important;
+  }
+  .gridContent {
+    grid-template-columns: 100% !important;
+  }
+  .fullContainer {
+    .top {
+      > .headlineOne {
+        font-size: 24px;
+      }
+      .tabs {
+        min-width: calc(100% - 16px) !important;
+      }
+    }
+    .bottom {
+      padding: 0 8px;
+      .content {
+        min-width: 100% !important;
+      }
+    }
+  }
+}
