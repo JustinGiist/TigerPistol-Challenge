@@ -106,16 +106,15 @@ const RendererComponent = (props: RendererComponentProps) => {
     });
     return tempMap;
   };
+  const fallback = (
+    <div className="fullContainer">
+      <div className="center">
+        <CircularProgress />
+      </div>
+    </div>
+  );
   return (
-    <Suspense
-      fallback={
-        <div className="fullContainer">
-          <div className="center">
-            <CircularProgress />
-          </div>
-        </div>
-      }
-    >
+    <>
       <div className="fullContainer">
         <div className="top">
           <div className="headlineOne">Tiger Pistol Code Challenge</div>
@@ -138,36 +137,40 @@ const RendererComponent = (props: RendererComponentProps) => {
           </div>
         </div>
         <div className="bottom" ref={scrollRef}>
-          <div
-            className={"content " + ActiveTab[activeTab].toLocaleLowerCase()}
-          >
-            <div className="headlineTwo">SUPER HERO NEWS</div>
-            {activeTab === ActiveTab.List && (
-              <ListComponent
-                data={data}
-                setActiveHero={setActiveHero}
-                heroMap={heroMap}
-              />
-            )}
-            {activeTab === ActiveTab.Grid && (
-              <GridComponent data={data} setActiveHero={setActiveHero} />
-            )}
-            {activeTab === ActiveTab.DataGrid && (
-              <DatagridComponent
-                data={data}
-                setActiveHero={setActiveHero}
-                heroMap={heroMap}
-              />
-            )}
-          </div>
+          <Suspense fallback={fallback}>
+            <div
+              className={"content " + ActiveTab[activeTab].toLocaleLowerCase()}
+            >
+              <div className="headlineTwo">SUPER HERO NEWS</div>
+              {activeTab === ActiveTab.List && (
+                <ListComponent
+                  data={data}
+                  setActiveHero={setActiveHero}
+                  heroMap={heroMap}
+                />
+              )}
+              {activeTab === ActiveTab.Grid && (
+                <GridComponent data={data} setActiveHero={setActiveHero} />
+              )}
+              {activeTab === ActiveTab.DataGrid && (
+                <DatagridComponent
+                  data={data}
+                  setActiveHero={setActiveHero}
+                  heroMap={heroMap}
+                />
+              )}
+            </div>
+          </Suspense>
         </div>
       </div>
       {activeHero && (
-        <ModalComponent closeFunction={closeFunction}>
-          <HeroCard hero={activeHero} closeFunction={closeFunction} />
-        </ModalComponent>
+        <Suspense fallback={fallback}>
+          <ModalComponent closeFunction={closeFunction}>
+            <HeroCard hero={activeHero} closeFunction={closeFunction} />
+          </ModalComponent>
+        </Suspense>
       )}
-    </Suspense>
+    </>
   );
 };
 export default RendererComponent;
