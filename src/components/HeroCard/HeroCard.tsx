@@ -8,6 +8,7 @@ interface HeroCardProps {
 }
 const HeroCard = (props: HeroCardProps) => {
   const getColors = (value: any) => {
+    if (value === "null") return " red";
     const number = parseInt(value);
     if (!isNaN(number)) {
       if (value > 70) {

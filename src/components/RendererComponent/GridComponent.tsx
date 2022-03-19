@@ -12,14 +12,16 @@ const GridComponent = (props: GridComponentProps) => {
       <div className="gridContent">
         {props.data &&
           props.data.map((hero: iHero, i: number) => {
-            return <GridItem props={props} hero={hero} i={i} />;
+            return (
+              <GridItem key={i + hero.name} props={props} hero={hero} i={i} />
+            );
           })}
       </div>
     );
   }, [props.data]);
   return (
     <>
-      <div className="subHeadlineBold">Grid View</div>
+      <div className="subHeadlineBold">Grid</div>
       {gridElement}
     </>
   );
@@ -35,7 +37,6 @@ export const GridItem = ({
 }) => {
   return (
     <div
-      key={i + hero.name}
       className="heroGridItem"
       onClick={() => {
         props.setActiveHero(hero.id);

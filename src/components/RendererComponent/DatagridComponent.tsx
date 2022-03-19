@@ -32,7 +32,17 @@ const DataGridElement = (props: ListComponentProps) => {
   };
   return (
     <div className="datagrid">
-      <DataGrid rows={rows} columns={columns} onRowClick={gridClick} />
+      <DataGrid
+        sx={{
+          boxShadow: 2,
+          "& .MuiDataGrid-row:hover": {
+            color: "var(--theme-teritary)",
+          },
+        }}
+        rows={rows}
+        columns={columns}
+        onRowClick={gridClick}
+      />
     </div>
   );
 };
